@@ -36,19 +36,4 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    Column(modifier = Modifier.padding(32.dp).fillMaxWidth()) {
-        OutlinedTextField(modifier = Modifier.fillMaxWidth(),
-            value = "",
-            onValueChange = {},
-            placeholder = {
-                Text(text = "Oque deseja buscar hoje?")
-            },
-            trailingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_search_24),
-                    contentDescription = "Botão de busca"
-                )
-            }
-        )
-    }
 }
