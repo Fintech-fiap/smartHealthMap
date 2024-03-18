@@ -21,6 +21,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import br.com.fiap.smarthealthmap.screens.DetailsScreen
+import br.com.fiap.smarthealthmap.screens.EstablishmentsScreen
+import br.com.fiap.smarthealthmap.screens.LandingScreen
 import br.com.fiap.smarthealthmap.ui.theme.SmartHealthMapTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +39,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val navController = rememberNavController()
 
+                    NavHost(
+                        navController = navController,
+                        startDestination = "landing"
+                    ) {
+                        composable("landing"){
+                            LandingScreen()
+                        }
+                        composable("establishments") {
+                            EstablishmentsScreen(navController)
+                        }
+                        composable("details") {
+                            DetailsScreen(navController)
+                        }
+                    }
                 }
             }
         }

@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import br.com.fiap.smarthealthmap.R
 
 @Composable
-fun Home() {
+fun LandingScreen() {
     Column(
         modifier = Modifier.fillMaxSize()
     ){
@@ -70,6 +70,6 @@ fun Home() {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    Home()
+fun LandingScreenPreview() {
+    LandingScreen()
 }
