@@ -26,7 +26,7 @@ fun LandingScreen() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp)
+                .height(280.dp)
         ) {
             Image(
                 modifier = Modifier.size(180.dp, 220.dp),
@@ -58,7 +58,7 @@ fun LandingScreen() {
             Image(
                 alignment = Alignment.BottomEnd,
                 modifier = Modifier
-                    .size(200.dp, 220.dp)
+                    .size(170.dp, 220.dp)
                     .offset(x = (10).dp),
                 painter = painterResource(id = R.drawable.home_red_rectagle),
                 contentScale = ContentScale.Crop,
