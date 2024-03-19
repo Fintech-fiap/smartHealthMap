@@ -126,7 +126,7 @@ fun EstablishmentCard(navController : NavController, establishment: Establishmen
                     EstablishmentStateHolder.establishment = establishment
                 }
             )
-            Text(text = "1.2KM")
+            Text(text = "")
         }
     }
 }
