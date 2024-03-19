@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,20 +22,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import br.com.fiap.smarthealthmap.R
 import br.com.fiap.smarthealthmap.model.Establishment
 import br.com.fiap.smarthealthmap.service.EstablishmentResponse
 import br.com.fiap.smarthealthmap.service.EstablishmentServiceFactory
+import br.com.fiap.smarthealthmap.service.EstablishmentStateHolder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 @Composable
-fun LandingScreen() {
+fun LandingScreen(navController : NavController) {
 
-    var establishmentState by remember {
-        mutableStateOf(listOf<Establishment>())
-    }
+    var establishmentState by remember { mutableStateOf(emptyList<Establishment>()) }
 
     val call =
         EstablishmentServiceFactory()
@@ -49,15 +50,19 @@ fun LandingScreen() {
             if (response.isSuccessful){
                 val establishmentResponse = response.body()
                 establishmentState  = establishmentResponse?.estabelecimentos ?: emptyList()
+                EstablishmentStateHolder.establishmentState = establishmentState
             }
-
         }
 
         override fun onFailure(call: Call<EstablishmentResponse>, t: Throwable) {
             Log.i("TESTE", t.message.toString())
         }
-
     })
+
+    LaunchedEffect(navController) {
+        navController.navigate("establishments")
+    }
+
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -110,5 +115,5 @@ fun LandingScreen() {
 @Preview(showBackground = true)
 @Composable
 fun LandingScreenPreview() {
-    LandingScreen()
+    //LandingScreen()
 }

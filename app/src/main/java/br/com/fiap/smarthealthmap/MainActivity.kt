@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = "landing",
+                        startDestination = "landing", //TODO mudar para landing
                         exitTransition = {
                             slideOutOfContainer(
                                 towards = AnimatedContentTransitionScope.SlideDirection.Start,
@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
                         }
                     ) {
                         composable("landing"){
-                            LandingScreen()
+                            LandingScreen(navController)
                         }
                         composable("establishments") {
                             EstablishmentsScreen(navController)
