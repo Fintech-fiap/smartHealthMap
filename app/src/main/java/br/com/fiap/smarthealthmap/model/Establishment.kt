@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
      @SerializedName("endereco_estabelecimento")
      val logradouro : String = "",
      @SerializedName("numero_estabelecimento")
-     val numerero : String = "",
+     val numero : String = "",
      @SerializedName("bairro_estabelecimento")
      val bairro : String = "",
      @SerializedName("codigo_cep_estabelecimento")
