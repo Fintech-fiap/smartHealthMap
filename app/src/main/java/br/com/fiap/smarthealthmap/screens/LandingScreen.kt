@@ -27,7 +27,7 @@ import br.com.fiap.smarthealthmap.R
 import br.com.fiap.smarthealthmap.model.Establishment
 import br.com.fiap.smarthealthmap.service.EstablishmentResponse
 import br.com.fiap.smarthealthmap.service.EstablishmentServiceFactory
-import br.com.fiap.smarthealthmap.service.EstablishmentStateHolder
+import br.com.fiap.smarthealthmap.service.EstablishmentsStateHolder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,7 +40,7 @@ fun LandingScreen(navController : NavController) {
     val call =
         EstablishmentServiceFactory()
         .getEstablishmentService()
-        .getEstablishments("41")
+        .getEstablishments("35")
 
     call.enqueue(object : Callback<EstablishmentResponse>{
         override fun onResponse(
@@ -50,12 +50,12 @@ fun LandingScreen(navController : NavController) {
             if (response.isSuccessful){
                 val establishmentResponse = response.body()
                 establishmentState  = establishmentResponse?.estabelecimentos ?: emptyList()
-                EstablishmentStateHolder.establishmentState = establishmentState
+                EstablishmentsStateHolder.establishmentsState = establishmentState
             }
         }
 
         override fun onFailure(call: Call<EstablishmentResponse>, t: Throwable) {
-            Log.i("TESTE", t.message.toString())
+            Log.i("ERROR", t.message.toString())
         }
     })
 

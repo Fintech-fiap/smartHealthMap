@@ -5,6 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import br.com.fiap.smarthealthmap.model.Establishment
 
-object EstablishmentStateHolder {
-    var establishment by mutableStateOf(Establishment())
+object EstablishmentsStateHolder {
+    var establishmentsState by mutableStateOf<List<Establishment>>(emptyList())
 }

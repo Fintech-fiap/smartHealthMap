@@ -28,17 +28,16 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import br.com.fiap.smarthealthmap.R
 import br.com.fiap.smarthealthmap.model.Establishment
 import br.com.fiap.smarthealthmap.service.EstablishmentStateHolder
+import br.com.fiap.smarthealthmap.service.EstablishmentsStateHolder
 
 @Composable
 fun EstablishmentsScreen(navController : NavController) {
@@ -91,7 +90,7 @@ fun EstablishmentsScreen(navController : NavController) {
             LazyColumn(
             ){
                 items(
-                    EstablishmentStateHolder.establishmentState
+                    EstablishmentsStateHolder.establishmentsState
                 ) {
                     EstablishmentCard(navController, it)
                 }
@@ -124,6 +123,7 @@ fun EstablishmentCard(navController : NavController, establishment: Establishmen
                 style = TextStyle(),
                 onClick = {
                     navController.navigate("details")
+                    EstablishmentStateHolder.establishment = establishment
                 }
             )
             Text(text = "1.2KM")
