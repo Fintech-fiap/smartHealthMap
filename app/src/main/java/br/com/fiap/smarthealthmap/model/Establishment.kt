@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
  data class Establishment(
      @SerializedName("nome_fantasia")
-     val name : String = "",
+     val nome : String = "",
      @SerializedName("codigo_uf")
      val codigoUf : String = "",
      @SerializedName("endereco_estabelecimento")
