@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -75,11 +76,72 @@ fun DetailsScreen(
             }
         }
         // Exibir detalhes do estabelecimento
-        Text(text = EstablishmentStateHolder.establishment.nome)
-        Text(text = "Endereço: ${EstablishmentStateHolder.establishment.logradouro}, ${EstablishmentStateHolder.establishment.numero}, ${EstablishmentStateHolder.establishment.bairro}, ${EstablishmentStateHolder.establishment.codigoUf} - ${EstablishmentStateHolder.establishment.cep}")
-        Text(text = "Email: ${EstablishmentStateHolder.establishment.email}")
-        Text(text = "Telefone: ${EstablishmentStateHolder.establishment.telefone}")
-        Text(text = "Turnos de Atendimento: ${EstablishmentStateHolder.establishment.turnos}")
+        Text(
+            text = EstablishmentStateHolder.establishment.nome,
+            fontWeight = FontWeight.Bold,
+            fontSize = 22.sp
+        )
+        Spacer(modifier = Modifier.height(25.dp))
+        Text(
+            text = "Endereço: ${EstablishmentStateHolder.establishment.logradouro}, ${EstablishmentStateHolder.establishment.numero}, ${EstablishmentStateHolder.establishment.bairro}, ${EstablishmentStateHolder.establishment.codigoUf} - ${EstablishmentStateHolder.establishment.cep}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Telefone: ${EstablishmentStateHolder.establishment.telefone}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Turnos de Atendimento: ${EstablishmentStateHolder.establishment.turnos}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Faz atendimento ambulatorial do SUS? ${EstablishmentStateHolder.establishment.atendimentoAmbulatorialSUS}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Possui centro cirúrgico? ${EstablishmentStateHolder.establishment.centroCirurgico}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Possui centro obstétrico? ${EstablishmentStateHolder.establishment.centroObstetrico}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Possui centro neonatal? ${EstablishmentStateHolder.establishment.centroNeonatal}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Possui atendimento hospitalar? ${EstablishmentStateHolder.establishment.atendimentoHospitalar}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Possui serviço de apoio? ${EstablishmentStateHolder.establishment.servicoApoio}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Possui atendimento ambulatorial? ${EstablishmentStateHolder.establishment.atendimentoAmbulatorial}",
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp
+        )
+
     }
 }
 
