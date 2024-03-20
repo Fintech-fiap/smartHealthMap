@@ -39,4 +39,5 @@ import com.google.gson.annotations.SerializedName
      val atendimentoAmbulatorial : String = "",
      @SerializedName("estabelecimento_faz_atendimento_ambulatorial_sus")
      val atendimentoAmbulatorialSUS : String = "",
+
  )
