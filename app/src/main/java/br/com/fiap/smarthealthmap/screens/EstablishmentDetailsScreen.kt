@@ -58,7 +58,10 @@ fun DetailsScreen(
                 )
             )
             {
-            Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = "Retornar à listagem")
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowLeft,
+                    contentDescription = "Retornar à listagem"
+                )
             }
             Row(
                 modifier = Modifier.padding(4.dp)
@@ -101,43 +104,43 @@ fun DetailsScreen(
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Faz atendimento ambulatorial do SUS? ${EstablishmentStateHolder.establishment.atendimentoAmbulatorialSUS}",
+            text = "Faz atendimento ambulatorial do SUS? ${changeValue(EstablishmentStateHolder.establishment.atendimentoAmbulatorialSUS)}",
             textAlign = TextAlign.Start,
             fontSize = 18.sp
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Possui centro cirúrgico? ${EstablishmentStateHolder.establishment.centroCirurgico}",
+            text = "Possui centro cirúrgico? ${changeValue(EstablishmentStateHolder.establishment.centroCirurgico)}",
             textAlign = TextAlign.Start,
             fontSize = 18.sp
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Possui centro obstétrico? ${EstablishmentStateHolder.establishment.centroObstetrico}",
+            text = "Possui centro obstétrico? ${changeValue(EstablishmentStateHolder.establishment.centroObstetrico)}",
             textAlign = TextAlign.Start,
             fontSize = 18.sp
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Possui centro neonatal? ${EstablishmentStateHolder.establishment.centroNeonatal}",
+            text = "Possui centro neonatal? ${changeValue(EstablishmentStateHolder.establishment.centroNeonatal)}",
             textAlign = TextAlign.Start,
             fontSize = 18.sp
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Possui atendimento hospitalar? ${EstablishmentStateHolder.establishment.atendimentoHospitalar}",
+            text = "Possui atendimento hospitalar? ${changeValue(EstablishmentStateHolder.establishment.atendimentoHospitalar)}",
             textAlign = TextAlign.Start,
             fontSize = 18.sp
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Possui serviço de apoio? ${EstablishmentStateHolder.establishment.servicoApoio}",
+            text = "Possui serviço de apoio? ${changeValue(EstablishmentStateHolder.establishment.servicoApoio)}",
             textAlign = TextAlign.Start,
             fontSize = 18.sp
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Possui atendimento ambulatorial? ${EstablishmentStateHolder.establishment.atendimentoAmbulatorial}",
+            text = "Possui atendimento ambulatorial? ${changeValue(EstablishmentStateHolder.establishment.atendimentoAmbulatorial)}",
             textAlign = TextAlign.Start,
             fontSize = 18.sp
         )
@@ -145,10 +148,19 @@ fun DetailsScreen(
     }
 }
 
+fun changeValue(value: String): String {
+    return if (value == "1") {
+        "Sim"
+    } else {
+        "Não"
+    }
+}
+
+
 // Pré-visualização da tela de detalhes (para visualizar o layout durante o desenvolvimento)
 @Preview(showBackground = true)
 @Composable
 fun DetailsScreenPreview() {
-    val navController = rememberNavController()
-    DetailsScreen(navController)
+//    val navController = rememberNavControler()
+//    DetailsScreen(navController)
 }
