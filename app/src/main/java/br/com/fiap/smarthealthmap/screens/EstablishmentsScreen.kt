@@ -38,6 +38,7 @@ import br.com.fiap.smarthealthmap.R
 import br.com.fiap.smarthealthmap.model.Establishment
 import br.com.fiap.smarthealthmap.service.EstablishmentStateHolder
 import br.com.fiap.smarthealthmap.service.EstablishmentsStateHolder
+import br.com.fiap.smarthealthmap.ui.theme.poppings
 
 @Composable
 fun EstablishmentsScreen(navController : NavController) {
@@ -59,7 +60,9 @@ fun EstablishmentsScreen(navController : NavController) {
             Text(
                 centerLetterWithColor("SHM"),
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                fontFamily = poppings
+
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -69,10 +72,11 @@ fun EstablishmentsScreen(navController : NavController) {
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Unidades de saúde mais próximas de você.",
+                text = "Unidades de saúde",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Start,
+                fontFamily = poppings
             )
         }
         Spacer(modifier = Modifier.height(2.dp))
@@ -80,7 +84,10 @@ fun EstablishmentsScreen(navController : NavController) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Text(text = "Selecione alguma opção para mais informações")
+            Text(
+                text = "Selecione alguma opção para mais informações",
+                fontFamily = poppings
+            )
         }
         Spacer(modifier = Modifier.height(10.dp))
         Column(
@@ -119,8 +126,10 @@ fun EstablishmentCard(navController : NavController, establishment: Establishmen
         ) {
             ClickableText(
                 modifier = Modifier.width(300.dp),
-               text = clickableText(establishment.nome),
-                style = TextStyle(),
+                text = clickableText(establishment.nome),
+                style = TextStyle(
+                    fontFamily = poppings
+                ),
                 onClick = {
                     navController.navigate("details")
                     EstablishmentStateHolder.establishment = establishment
