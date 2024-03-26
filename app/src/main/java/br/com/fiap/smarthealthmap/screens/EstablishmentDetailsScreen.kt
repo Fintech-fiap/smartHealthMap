@@ -1,8 +1,8 @@
 package br.com.fiap.smarthealthmap.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,8 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -30,10 +28,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import br.com.fiap.smarthealthmap.R
-import br.com.fiap.smarthealthmap.model.Establishment
 import br.com.fiap.smarthealthmap.service.EstablishmentStateHolder
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.rememberCameraPositionState
 
 
 // Tela de detalhes do estabelecimento
@@ -46,9 +47,12 @@ fun DetailsScreen(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        //Header
         Row(
             modifier = Modifier
-                .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Button(
                 onClick = { navController.navigate("establishments") },
@@ -78,72 +82,113 @@ fun DetailsScreen(
                 )
             }
         }
-        // Exibir detalhes do estabelecimento
-        Text(
-            text = EstablishmentStateHolder.establishment.nome,
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp
-        )
-        Spacer(modifier = Modifier.height(25.dp))
-        Text(
-            text = "Endereço: ${EstablishmentStateHolder.establishment.logradouro}, ${EstablishmentStateHolder.establishment.numero}, ${EstablishmentStateHolder.establishment.bairro}, ${EstablishmentStateHolder.establishment.codigoUf} - ${EstablishmentStateHolder.establishment.cep}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Telefone: ${EstablishmentStateHolder.establishment.telefone}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Turnos de Atendimento: ${EstablishmentStateHolder.establishment.turnos}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Faz atendimento ambulatorial do SUS? ${changeValue(EstablishmentStateHolder.establishment.atendimentoAmbulatorialSUS)}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Possui centro cirúrgico? ${changeValue(EstablishmentStateHolder.establishment.centroCirurgico)}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Possui centro obstétrico? ${changeValue(EstablishmentStateHolder.establishment.centroObstetrico)}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Possui centro neonatal? ${changeValue(EstablishmentStateHolder.establishment.centroNeonatal)}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Possui atendimento hospitalar? ${changeValue(EstablishmentStateHolder.establishment.atendimentoHospitalar)}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Possui serviço de apoio? ${changeValue(EstablishmentStateHolder.establishment.servicoApoio)}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Possui atendimento ambulatorial? ${changeValue(EstablishmentStateHolder.establishment.atendimentoAmbulatorial)}",
-            textAlign = TextAlign.Start,
-            fontSize = 18.sp
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 6.dp)
+        ) {
+            Text(
+                text = EstablishmentStateHolder.establishment.nome,
+                fontWeight = FontWeight.Bold,
+                fontSize = 22.sp
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Box(
+            modifier = Modifier.fillMaxWidth()
+        ){
+            GoogleMap(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .padding(horizontal = 6.dp),
+                cameraPositionState = rememberCameraPositionState {
+                    position = CameraPosition.fromLatLngZoom(
+                        LatLng(
+                            EstablishmentStateHolder.establishment.latitude.toDouble(),
+                            EstablishmentStateHolder.establishment.longitude.toDouble()
+                        ),
+                        10f
+                    )
+                }
+            ) {
+                Marker(
+                    position = LatLng(
+                        EstablishmentStateHolder.establishment.latitude.toDouble(),
+                        EstablishmentStateHolder.establishment.longitude.toDouble()
+                    ),
+                    title = EstablishmentStateHolder.establishment.nome,
+                    snippet = "Marcação"
+                )
+            }
+        }
+        Column(
+            modifier = Modifier.padding(horizontal = 6.dp)
+        ) {
+            Spacer(modifier = Modifier.height(25.dp))
+            Text(
+                text = "Endereço: ${EstablishmentStateHolder.establishment.logradouro}," +
+                        " ${EstablishmentStateHolder.establishment.numero}, " +
+                        "${EstablishmentStateHolder.establishment.bairro}, " +
+                        "${EstablishmentStateHolder.establishment.codigoUf} - ${EstablishmentStateHolder.establishment.cep}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Telefone: ${EstablishmentStateHolder.establishment.telefone}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Turnos de Atendimento: ${EstablishmentStateHolder.establishment.turnos}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Faz atendimento ambulatorial do SUS? ${changeValue(EstablishmentStateHolder.establishment.atendimentoAmbulatorialSUS)}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Possui centro cirúrgico? ${changeValue(EstablishmentStateHolder.establishment.centroCirurgico)}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Possui centro obstétrico? ${changeValue(EstablishmentStateHolder.establishment.centroObstetrico)}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Possui centro neonatal? ${changeValue(EstablishmentStateHolder.establishment.centroNeonatal)}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Possui atendimento hospitalar? ${changeValue(EstablishmentStateHolder.establishment.atendimentoHospitalar)}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Possui serviço de apoio? ${changeValue(EstablishmentStateHolder.establishment.servicoApoio)}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Possui atendimento ambulatorial? ${changeValue(EstablishmentStateHolder.establishment.atendimentoAmbulatorial)}",
+                textAlign = TextAlign.Start,
+                fontSize = 18.sp
+            )
+        }
 
     }
 }

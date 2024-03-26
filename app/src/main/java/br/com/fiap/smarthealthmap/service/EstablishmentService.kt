@@ -8,6 +8,7 @@ interface EstablishmentService {
     @GET("estabelecimentos")
     fun getEstablishments(
         @Query("codigo_uf") uf : String,
-        @Query("status") status : Int = 1
+        @Query("status") status : Int = 1,
+        @Query("limit") limit : Int = 20
     ) : Call<EstablishmentResponse>
 }
